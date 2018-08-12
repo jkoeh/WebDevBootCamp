@@ -11,3 +11,5 @@ selector:pseudo-class {
 * :hover - triggers when mouse hover
 * :focus - triggers when an element is focused. In generalthis means the user clicks, or taps on an element or selects it with the keyboard tab key.
 * :active - triggers when an element is being activated by user. Typically starts when user pressed down the mouse
+
+## CSS transformation

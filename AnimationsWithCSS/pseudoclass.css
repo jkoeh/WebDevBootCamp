@@ -14,3 +14,12 @@ button:active{
     background-color: orange;
     font-size: 30px;
 }
+#firstbutton:active{
+    color: purple
+}
+#secondbuton:hover{
+    color: green
+}
+#thirdbutton:focus{
+    color: orange
+}
