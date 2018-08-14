@@ -1,0 +1,32 @@
+.box {
+    background-color: #9b59b6;
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    text-align: center;
+    color: white;
+    font-size: 17px;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+/* .box:hover{
+    background: #e74c3c;
+    transform: top left;
+    transform: scale(2);
+   
+} */
+/* .animated{    
+    transition-property: background, transform;
+    transition-duration: 1s, 10s;
+    transition-delay: 1s, 2s;
+
+} */
+.box:hover{
+    transform: translateX(300px);
+}
+.animated{
+    transition-property: transform;
+    transition-duration: 2s;
+    /* transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); */
+    transition-timing-function: ease-in;
+}
