@@ -1,4 +1,4 @@
-# AnimationWithCSS
+# AnimationWithCSS: Transforms and Transitions
 ## Psuedo-classes
 <p>A keyword added to a selecor that specifies a special state of the selected element. For example: <i> :hover </i> can be used to apply a style when the user hovers over a button</p>
 
@@ -44,3 +44,7 @@ selector {
     - transofrm: scale();
     - transform: rotate();
     - opacity;
+
+# CSS Animations: Keyframes
+## What is keyframes
+* It is a css framework that allos the developer to change an element in a mutlipart(size, color, etc), multistage manner (i.e. state A, state B, state C ...to State F). Unlike transition/transform which only allows a single state transformation.
