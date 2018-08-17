@@ -48,3 +48,14 @@ selector {
 # CSS Animations: Keyframes
 ## What is keyframes
 * It is a css framework that allos the developer to change an element in a mutlipart(size, color, etc), multistage manner (i.e. state A, state B, state C ...to State F). Unlike transition/transform which only allows a single state transformation.
+* common properties:
+    - animation-name: define which animation to use
+    - animation-duration
+    - animation-timing-function
+    - animation-delay
+    - animation-iteration-count
+    - animation-direction: reverse, alternate. Reverse would start the elemtn at the opposite
+    - animation-fill-mode: foward, backward, both. Determines the start and ends states.  
+    - animation-description
+    - animation-play-state: paused, running
+* can be combined into shorthand, animation

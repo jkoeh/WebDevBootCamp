@@ -1,0 +1,31 @@
+.loader {
+    margin: auto;
+    border: 16px solid #bdc3c7;
+    width: 120px;
+    height: 120px;
+    border-top-color: #1abc9c;
+    border-bottom-color: #3498db;
+    border-radius: 50%;
+    animation: colorspin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes colorspin {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        border-top-color: #2ecc71;
+        border-bottom-color: #2ecc71;
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
