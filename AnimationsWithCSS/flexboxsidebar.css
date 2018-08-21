@@ -1,0 +1,24 @@
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:200');
+body{
+    margin: 0;
+    background: #ecf0f1;
+}
+.sidebar{
+    width: 15vw;
+    height: 100vh;
+    font-family: raleway;
+    background: #34495e;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.item{        
+    color: white;
+    font-size: 30px;    
+}
+.section{
+    padding: 10px;
+}

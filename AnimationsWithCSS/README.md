@@ -59,3 +59,20 @@ selector {
     - animation-description
     - animation-play-state: paused, running
 * can be combined into shorthand, animation
+
+# Advanced CSS: Layout with Flexbox
+## Flexbox
+### What is it?
+It is a more efficient to layout, align, and distribute space among elements in a container even when their sizes is unknown. Define the properties of the container and item seperately. 
+### Further reading
+https://css-tricks.com/snippets/css/a-guide-to-flexbox
+### Container properties:
+* display: 
+    flex, change container to a flex container. change items inside the container to flex items. arrange the flex items inside the flex container to inline
+* flex-direction:
+    main axis is main direction of the flex-direction and cross axis is always the perpendicular direction. By default main-axis is row, from right to left. (row, row-reverse, column, column-reverse)
+* flex-wrap: determines whether items should be in the same line. Wrap means don't stay on same line. You could also use wrap reverse to reverse the direction of cross axis
+* justify-content: aligns the flexible container's items when the items do not use all available space on the main-axis.
+* align-items: define how space is distributed items in flex container along the cross axis. 
+    - flex-start, flex-end, stretch, center, baseline
+* align-content: define how the space is distributed items between row in flex container along the cross-axis. 
