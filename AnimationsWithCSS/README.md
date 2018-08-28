@@ -76,3 +76,11 @@ https://css-tricks.com/snippets/css/a-guide-to-flexbox
 * align-items: define how space is distributed items in flex container along the cross axis. 
     - flex-start, flex-end, stretch, center, baseline
 * align-content: define how the space is distributed items between row in flex container along the cross-axis. 
+
+### Flex Item Properties
+* align-self: allows individual item to overide align-items, which gives us finer control of each items along the cross axis.
+* order: allows dev to set order of individual items. the lower the order, the higher in the display order. by default, all items have an order of 0.
+* flex: it is a short hand for  flex-growth, flex-shrink, flex-basis
+    - flex-basis: it's kind of like width but takes priority over width. It determines the ideal width of an item before it's placed into a flex container. https://css-tricks.com/flex-grow-is-weird/ 
+    - flex-grow: dictate how the unused spaces should be spread amongst flex items
+    - flex-shrink:dictate how the items should shrink when there isn't enough space in container. we would use this to emphasis what part to shrink faster than the other. by default flex-shrink is 1. 
