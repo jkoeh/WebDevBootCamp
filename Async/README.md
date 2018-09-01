@@ -71,3 +71,80 @@ a shallow copy however does not take up memory space.
 ```javascript
 var referecenobject = obj;
 ```
+### what is setTimeout
+it asynchronously invokes a callback after a delay in milliseconds
+```javascript
+var delay = 1000;
+var timerId = setTimeout(callback, dealy)
+```
+### what is clearTimeout
+it asynchronously cancel the task scheduled for timerId.
+```javascript
+clearTimeout(timerId)
+```
+
+### what is setInterval/clearInterval?
+it asynchronously runs a task on repeat every x seconds. 
+```javascript
+var num =0
+var intervalId = setInterval(function(){
+    num ++;
+    console.log("num: ", num);
+    if(num === 3){
+        clearInterval(intervalId);
+    }
+}, 1000);
+```
+
+##Event loop and Queue
+### What is the Queue?
+an order list of functions waiting to be placed in the stack. first in first out (FIFO)
+### What is event loop and how does the queue work with the stack
+event loop is the functionality of javascript runtime that checks the queue when the stack is empty. if the stack is empty, the front of the queu is placed in the stack. 
+
+this means in a code like following, it will pring 2 first than 1 because console.log("2") is placed on stack and the  console.log("1") is on the queue and will not be run until the stack is empty.
+```javascript
+
+setTimeout(function(){
+    console.log("1");
+}, 0);
+
+console.log("2")
+```
+### Define Javascript as a single threaded language
+Code execution is linear. Code that is running cannot be interrupted by something else going on in the program
+
+## Promise
+it is an object that represent a task that will be completed in the fture. the then and catch handles the resolve and reject action of the function in promise. 
+
+### Cons of using nested callbacks
+- really difficult to read
+- code is not modular
+- logic is difficult to reason
+### Promise chaining  to create synchronous programing
+allows multiple .then to be chained to a promise. if a a previous callback inside .then returns a promise, the next callback inside .then will wait for the previous promise to finish. we can use this to combine async tasks into a chain of promises.
+
+## AJAX
+- it is an approach to web dev. not tech, framework or technology. 
+- website can send and request data from server in the background withotu distrubing the current page, which leads to single page apps
+
+### XMLHttpRequest
+- XHR has 5 state, numbering from 1 to 5. unsent, opened, header recieved, loading, done. 
+- you must open the request and then send the request.
+- use the following code the create client, open, send and recieve response from XMLHttpRequest
+```javascript
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var XHR = new XMLHttpRequest();
+XHR.onreadystatechange = function(){
+    console.log('Ready STATE IS: ', XHR.readyState);
+    if(XHR.readyState == 4){
+        if(XHR.status == 200){
+        console.log(XHR.responseText);
+        } else{
+            console.log("Error");
+        }
+    }
+}
+XHR.open("GET", "https://api.github.com/zen");
+XHR.send();
+```
