@@ -148,3 +148,18 @@ XHR.onreadystatechange = function(){
 XHR.open("GET", "https://api.github.com/zen");
 XHR.send();
 ```
+### Fetch API
+``` javascript
+var url = "https://api.github.com/users/jkoeh1";
+    fetch(url)
+    .then(handleErrors)
+    .then(function(request){
+        console.log("Good");
+        console.log(request.json());
+    })
+    .catch(function(){
+        console.log("bad");
+    })
+```
+- it is an api that allows us to send request easily and handles promise
+- it simplies the flow to send xhr.
