@@ -96,13 +96,13 @@ var intervalId = setInterval(function(){
 }, 1000);
 ```
 
-##Event loop and Queue
+## Event loop and Queue
 ### What is the Queue?
 an order list of functions waiting to be placed in the stack. first in first out (FIFO)
 ### What is event loop and how does the queue work with the stack
 event loop is the functionality of javascript runtime that checks the queue when the stack is empty. if the stack is empty, the front of the queu is placed in the stack. 
 
-this means in a code like following, it will pring 2 first than 1 because console.log("2") is placed on stack and the  console.log("1") is on the queue and will not be run until the stack is empty.
+this means in a code like following, it will print 2 first than 1 because console.log("2") is placed on stack and the  console.log("1") is on the queue and will not be run until the stack is empty.
 ```javascript
 
 setTimeout(function(){
@@ -115,7 +115,7 @@ console.log("2")
 Code execution is linear. Code that is running cannot be interrupted by something else going on in the program
 
 ## Promise
-it is an object that represent a task that will be completed in the fture. the then and catch handles the resolve and reject action of the function in promise. 
+it is an object that represent a task that will be completed in the future. the .then and .catch handles the resolve and reject action of the function in promise. 
 
 ### Cons of using nested callbacks
 - really difficult to read
@@ -163,3 +163,75 @@ var url = "https://api.github.com/users/jkoeh1";
 ```
 - it is an api that allows us to send request easily and handles promise
 - it simplies the flow to send xhr.
+
+### jQuery
+it is a cross-platform javascript library designed to simplied client-side scripting of html. It is primarily used to manipulate DOM and makes it quicker to write JS code by supplying method that would take multiple line in JS (XHR).
+
+Main Methods: 
+- $.ajax
+- $.get
+- $.post
+- $.getJSON
+
+drawback of jQuery, it contains 200+ methods many of which is redundant because javascript could do it with the same line of code. what it is best for, handling XHR request
+
+### axios 
+it is a javscript library that simplify XHR request. it's ligher weight than jQuery but retains it's biggest strength in XHR request simplification 
+- axios makes XMLHttpRequest from browser
+- axios makes http request from node.js
+- supports the promise api
+- intercept request and response
+- transform request and reponse data
+- cancel requests
+- automatic transform for JSON data
+
+#### sending request thru axios
+``` javascript
+axios.get('/user?ID=12345')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+``` 
+#### sending request thru params
+
+``` javascript
+axios.get('/user', {
+    params: {
+      ID: 12345
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
+
+
+#### handling errors thru axios
+``` javascript
+axios.get('/user/12345')
+  .catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+``` 
+
