@@ -81,3 +81,4 @@ function guessingGame(amount) {
         }
     }
 }
+

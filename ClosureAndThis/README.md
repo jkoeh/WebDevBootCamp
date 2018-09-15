@@ -143,3 +143,16 @@ jordan.sayHi();
 // return hi jordan. 
 // The second keyword 'this' refers to jordan. This method enforced the context of 'this'. We do not use jordan during bind because the code would've been unusable for any other name/person. 
 ```
+
+### new
+when 'new' keyword is used to create a object, the 'this' inside the object will be targeted to the object instead of the global variable.
+
+```javascript
+function Person(firstname, lastname){
+    this.firstname = firstname;
+    this.lastName = lastanem;
+}
+var john = new Person('john', 'koeh');
+john.firstname == john;
+john.lastname == koeh;
+```
