@@ -1,1 +1,3 @@
 .DS_Store
+NodeAndMongo/todos_api/node_modules/*
+node_modules/*
