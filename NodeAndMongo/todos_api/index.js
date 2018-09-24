@@ -1,10 +1,19 @@
 var express = require('express'),
-    app=express(), 
-    port = process.env.PORT || 3000
-
-app.get('/', function(req, res){
-    res.json({evil:"king of the south"})
+    app = express(),
+    port = process.env.PORT || 3000,
+    bodyParser = require('body-parser');
+var todoRoutes = require('./routes/todos')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.get('/', function (req, res) {
+    res.send("Hello")
 });
-app.listen(port, function(){
+
+//define prefix of routes
+
+app.use('/api/todos', todoRoutes);
+app.listen(port, function () {
     console.log("app is running on port " + port);
 });
