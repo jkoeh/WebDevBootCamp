@@ -7,8 +7,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+//setup path for static html and css. 
+//__dirname allows the app to be adjustable to different directory
+app.use(express.static(__dirname+'/views'));
+app.use(express.static(__dirname+'/public'));
 app.get('/', function (req, res) {
-    res.send("Hello")
+    res.sendFile("index.html")
 });
 
 //define prefix of routes

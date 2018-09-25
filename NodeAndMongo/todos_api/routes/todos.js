@@ -2,8 +2,16 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models');
 var helpers = require('../helpers/todos');
+//when two routes only differ by action such as get an post, we can combined them into a single routing.
+router.route('/')
+    .get(helpers.getTodos)
+    .post(helpers.createTodos)
 
-
+router.route('/:todoId')
+    .get(helpers.getTodo)
+    .put(helpers.updateTodo)
+    .delete(helpers.deleteTodo)
+module.exports = router;
 // router.get('/', function (req, res) {
 //     db.Todo.find()
 //         .then(function (todo) {
@@ -25,15 +33,7 @@ var helpers = require('../helpers/todos');
 //         })
 // });
 
-//when two routes only differ by action such as get an post, we can combined them into a single routing.
-router.route('/')
-    .get(helpers.getTodos)
-    .post(helpers.createTodos)
 
-router.route('/:todoId')
-    .get(helpers.getTodo)
-    .put(helpers.updateTodo)
-    .delete(helpers.deleteTodo)
 // router.get('/:todoId', function (req, res) {
 //     db.Todo.findById(req.params.todoId)
 //         .then(function (foundToDo) {
@@ -62,4 +62,3 @@ router.route('/:todoId')
 //             res.send(err)
 //         })
 // });
-module.exports = router;
