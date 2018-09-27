@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(handleErr)
 
     document.querySelector('.list').addEventListener('click', function (e) {
+        e.stopPropagation();
         if (e.target && e.target.nodeName == 'SPAN') {
             removeTodo(e)           
         }
@@ -14,12 +15,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector("#todoInput").addEventListener("keydown", function (e) {
         if (e.keyCode === 13) {
-            createToDo(e);
+            createTodo(e);
+        }
+    })
+    document.querySelector('.list').addEventListener('click', function (e) {
+        if (e.target && e.target.nodeName == 'LI') {
+            updateTodo(e);
         }
     })
 
+
 });
-function createToDo(e) {
+
+function updateTodo(e){
+    var id = e.target.todoId;
+    var status = e.target.completed;
+    axios.put(todosIdRoute(id), {completed: !status})
+        .then(function(res){
+            e.target.classList.toggle('done')
+            e.target.completed = !status;
+        })
+        .catch(handleErr)
+
+}
+function createTodo(e) {
     axios.post(todosRoute, { name: e.target.value })
         .then(function (res) {
             e.target.value = "";
@@ -48,6 +67,7 @@ function addTodo(todo) {
     var span = document.createElement('span');
     span.appendChild(document.createTextNode('X'));
     li.todoId = todo._id;
+    li.completed = todo.completed;
     li.setAttribute("class", "task");
     li.appendChild(document.createTextNode(todo.name));
     li.appendChild(span);
