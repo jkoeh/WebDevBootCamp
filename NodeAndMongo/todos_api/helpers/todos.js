@@ -7,6 +7,7 @@ exports.getTodos = function (req, res) {
             res.json(todo);
         })
         .catch(function (err) {
+            res.status(400);
             res.send(err);
         })
 }
@@ -16,6 +17,7 @@ exports.createTodos = function (req, res) {
             res.status(201).json(newToDo);
         })
         .catch(function (err) {
+            res.status(400);
             res.send(err);
         })
 }
@@ -25,6 +27,7 @@ exports.getTodo = function (req, res) {
             res.json(foundToDo);
         })
         .catch(function (err) {
+            res.status(400);
             res.send(err)
         })
 }
@@ -35,6 +38,7 @@ exports.updateTodo = function (req, res) {
             res.json(todo);
         })
         .catch(function (err) {
+            res.status(400);
             res.send(err)
         })
 }
@@ -44,6 +48,7 @@ exports.deleteTodo = function (req, res) {
             res.json({ message: "deleted" });
         })
         .catch(function (err) {
+            res.status(400);
             res.send(err)
         })
 }
