@@ -249,3 +249,86 @@ function swap(a,b,c){
 }
 
 ```
+-------------------------------
+# ES2015 part II
+## class
+- we now use `class` function to reduce the need of using constructor functions and `new` key word to declare a class
+``` javascript
+//ES5
+function Student(name, id){
+    this.name = name;
+    this.id = id;
+}
+var john = new Student('john', '18');
+
+//instance method
+Student.prototype.sayHello = function(){
+    return `hello ${this.name} my old friend!`
+}
+//class method (like a static method)
+Student.isStudent = function(obj){
+    obj.constructor === Student
+}
+//ES2015
+class Student{
+    constructor(name, id){
+        this.name = name;
+        this.id = id;
+    }
+    //instance method
+    sayHello(){
+        return `hello ${this.name} my old friend!`
+    }
+    static isStudnet(obj){
+        return obj.constructor === Student;
+    }
+}
+var john = new Student('john', '18');
+```
+- although the syntax looks different, `class` keyword is just an abstraction. underneath it's still doing what ES5 has been doing. 
+## inheritance, extends
+- inheritance : passing properties and methods from one class to the other. Below we see how inheritance is achieved in ES5 and ES2015
+```javascript
+//ES5
+function Person(name, id){
+    this.name = name;
+    this.id = id;
+}
+Person.prototype.sayHello(){
+    return `Hello ${this.name}`;
+}
+function Student(name, id){
+    this.name = name;
+    this.id = id;
+}
+Student.prototype = Object.create(Person.prototype)
+Student.prototype.constructor = Student;
+
+//ES2015
+class Person{
+    constructor(name, id){
+        this.name = name;
+        this.id = id;
+    }
+    //instance method
+    sayHello(){
+        return `hello ${this.name} my old friend!`
+    }
+    static isStudnet(obj){
+        return obj.constructor === Student;
+    }
+}
+class Student extends Person{
+    
+}
+
+```
+- in essence, we can now use `extends` to achieve inheritance directly on the child class
+
+## super
+
+## using native Promise constructor 
+
+## pasuing and resuming generator
+
+## copying object, array-like object conversion 
