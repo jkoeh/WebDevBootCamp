@@ -1,6 +1,6 @@
-.box{
-    margin: 2px;
-    flex-basis: 12%;
+.card{
+    margin: 15px;    
     width: 200px;
     height: 200px;
+    border-radius: 30px;    
 }
