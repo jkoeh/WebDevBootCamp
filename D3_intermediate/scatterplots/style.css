@@ -1,0 +1,11 @@
+svg {
+  margin: 0 auto;
+  display: block;
+  overflow: visible
+
+}
+/*each gridline in svg is in the tick class and the line is line.*/
+.tick line {
+  stroke: #ccc;
+  stroke-dasharray: 10,5;
+}

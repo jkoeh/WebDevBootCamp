@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Component 1</title>
+  <link rel="stylesheet" href="first-component.css">
+  <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+  <!-- we no longer need react dom factory, we pull in babel library instead -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- script type is now babel instead of javascript -->
+  <script type="text/babel">
+  class Hobbies extends React.Component{
+    render(){
+      const liStyle = {fontSize: '1.5em'};
+      const hobbies = ["sleep", "eat", "meow"]
+      return(
+        //each child in an array or iterator should have a unique "key" prop
+        <ul>
+          {
+            hobbies.map((h, i)=> <li key={i} style={liStyle}>{h}</li>)
+          }
+        </ul>
+      )
+    }
+  }
+    class Pet extends React.Component{      
+      render(){         
+        
+          return (        
+              <div className="card">
+                <h2 className="name">Moxie</h2>
+                <img src="https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&h=350" 
+                alt = "moxie my cat"/>
+                <h5 style={{color: 'blue'}}>Hobbies</h5>               
+                <Hobbies />
+              </div>
+          )       
+      }
+    }
+    // we no longer need to create the element with React.createElement
+    ReactDOM.render(<Pet />, document.getElementById('app'));
+  </script>
+</body>
+
+</html>

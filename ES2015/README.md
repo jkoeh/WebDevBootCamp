@@ -326,9 +326,218 @@ class Student extends Person{
 - in essence, we can now use `extends` to achieve inheritance directly on the child class
 
 ## super
+- super allows a class to call the constructor of another class without needing to use apply
+```javascript
+//ES5
+function Person(name, id){
+    this.name = name;
+    this.id = id;
+}
+function Student(){
+    Person.apply(this, arguments)
+}
+
+//ES2015
+class Person{
+    constructor(name, id){
+        this.name = name;
+        this.id = id;
+    }
+    //instance method
+    sayHello(){
+        return `hello ${this.name} my old friend!`
+    }
+    static isStudnet(obj){
+        return obj.constructor === Student;
+    }
+}
+class Student extends Person{
+    constructor(name, id){
+        super(name, id)
+    }
+}
+```
+
+## Map
+#### what is it?
+- `map` is a key-value pair. Any value(object or primitive) could be used as either key or value
+```javascript
+var firstMap = new Map;
+
+firstMap.set(1, "john");
+firstMap.set(false, "boolean")
+firstMap.set('abc', 'dfg');
+firstMap.delete('abc')
+firstMap.Size; //2
+
+firstMap.get(1)//"john"
+firstMap.forEach(v=> console.log(v))
+
+//john
+//boolean
+for(let kvp of firstMap){
+    console.log(kvp[0]);//key
+    console.log(kvp[1]);//value
+}    
+firstMap.values() //map iterator of values
+firstMap.keys() //map iterator of keys
+```
+#### why use map instead of Object
+- easier to find size
+- element order is preserved in map not Object
+- won't overwrite keys on Object.prototype
+- easier to iterate
+
+#### when to use map
+- if the key is dynamic
+- if the keys are not strings
+- frequent adding and removing kvp
+- operating with multiple keys
+
+### WeakMap
+- all keys must be object not primitive
+- more performant than map but can't be iterate over
+## Set
+- basically a hashset.
+- it can contain any datatype. 
+- all values must be unique 
+- created by `new`
+
+```javascript
+var newSet = new Set; 
+//or created from array
+var s2 = new Set([1,2,34])
+
+newSet.add(10);
+newSet.add(29);
+//this is ignore b/c 10 is already in there
+newSet.add(10);
+newSet.size;//2 
+
+newSet.has(10); //true
+newSet.delete(10);//true
+
+newSet.size//1;
+```
+- there exists a WeakSet data structure where all val is object
+
 
 ## using native Promise constructor 
+### what is promise?
+- a one-time guaranteed return of some future value
+- when the value is returned, the promise is either resolved/full-filled or rejected
+- refactor called back hell
+### how to new it up and what is its parameter
+```javascript
+function displayAtRnd(){
+    return new Promise(function(resolve, reject){
+        setTimeout(function(){
+            if(Math.random()> 5){
+                resolve('Yes!');
+            }
+            else{
+                reject('No!');
+            }
+        }, 2000);
+    })
+}
+```
+- since promise always return something that has .then(thenable), we can chain promise together and return values from one promise to another
 
-## pasuing and resuming generator
+### Promise.all
+- Promise.all accepts an array of promise and resolve all of them or reject as soon as one of promises has been reject (fail fast)
+- If all of the promise passed in fulfill, Promies.all resolve is fulfilled with an array of values bases on the orders of the promises passed in even though the promises do not resolve in the same sequence.
+```javascript
+function getMovie(title){
+    return fetch(`https://www.omdbapi.com/?t=${title}&apikey=thewdb`).then(response => response.json());
+}
+// a b c are promises in pending. they have not been resolved or rejected yet. we could now use Promise.all to resolve all of them instead of using a series of .then
+var a = getMovie("Titanic");
+var b = getMovie("shrek");
+var c = getMovie("braveheart");
+
+Promise.all([a,b,c]).then(movies => movies.forEach(value=> console.log(value.Year)));
+
+```
+## pausing and resuming generator
+- generator is a special kind of function that can pause and resume execution at any time
+- created using `*`
+- when invoked a generator object is returned with a key of values and done
+- value is returned from the paused function using keyword `yield`
+- done is a boolean which returns true when the function has completed
+
+```javascript
+function* pauseAndResumeLater(num){
+    for(let i=0; i<num; i++){
+        yield i;
+    }
+var gen = pauseAndResumeLater(5);
+
+gen.next(); //{value: 0, done: false}
+gen.next(); //{value: 1, done: false}
+gen.next(); //{value: 2, done: false}
+gen.next(); //{value: 3, done: false}
+gen.next(); //{value: 4, done: false}
+gen.next(); //{value: undefined, done: true}
+}
+
+```
+- we could also use it to yield multiple values, iterate over a generator, or use it to pause async code
 
 ## copying object, array-like object conversion 
+- `Object.assign` is a convenient way of assigning a object key-value pair to another object without referencing directly. 
+- it is however not a deep clone. Meaning if we have objects inside the object we are copying - those still have a reference! 
+```javascript
+var o = {class: 'javascript', instructor: ['a', 'b', 'c']}
+var o2 = Object.assign({}, o);
+o2.class = 'csharp';
+o2.instructor.push('d');
+o.class //javascript
+o.instructor//['a', 'b', 'c', 'd']
+
+```
+
+## other helpful functions
+### Array.from
+- convert array-like object into array. such as a set to array or a html elements into array of element
+```javascript
+var set = new Set([1,2,3,4,5,5,5,5])//[1,2,3,4,5]
+Array.from(set); //[1,2,3,4,5]
+```
+
+### find
+- invoked on an array
+- accepts a callback with value, index and array just like map, filter, etc. 
+- return first value found or return undefined
+
+```javascript 
+var student = [{name: "john"},{name: "josh"},{name: "jason"},{name: "john"}]
+
+student.find(function(val){
+    return val.name === 'john';
+}); //{name: 'john'}
+student.find(function(val){
+    return val.name === 'hi';
+});//undefined
+```
+
+### findIndex 
+- exactly the same as find except it returns the index of the first found element. if nothing is found, it returns -1
+
+### includes
+- returns a boolean on whether a value is in a string
+
+```javascript
+"awsome".includes("some"); //true
+```
+
+### Number.isFinite & Number.isInteger
+- this method seeks to take away the complication of checking whether a variable is a number by taking into account of NaN
+- without it, we have to check that the type of the variable is a number and is not a NaN (which IS a number)
+```javascript
+function seeIfNum(val){
+    if(Number.isFinite(val)){
+        return "is a num";
+    };
+}
+```
