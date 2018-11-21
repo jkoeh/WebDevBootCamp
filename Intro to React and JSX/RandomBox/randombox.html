@@ -1,0 +1,31 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Component 1</title>
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <!-- we no longer need react dom factory, we pull in babel library instead -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+    var bgColors = ["Blue", "Cyan", "Green", "Yellow", "red", "White", "Black"];
+    function rndNumber(){
+        return Math.floor(Math.random() * 7);
+    }
+      class Box extends React.Component{    
+        render(){             
+          const boxStyle = {backgroundColor: bgColors[rndNumber()], width: 500, height: 200};
+          const textStyle = {color: bgColors[rndNumber()], textAlign: 'center'}
+            return (              
+                <div style={boxStyle}>
+                    <h3 style = {textStyle}>Random Box</h3>                      
+                </div>
+            )       
+        }
+      }
+      // we no longer need to create the element with React.createElement
+      ReactDOM.render(<Box />, document.getElementById('app'));
+    </script>
+</body>

@@ -3,11 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "create-react-app": "^2.1.1",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-scripts": "2.1.1",
     "shuffle-array": "^1.0.1"
+=======
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-scripts": "2.1.1"
+>>>>>>> 1c7916933388905e1188dd6f7d5a3eb837d27909
   },
   "scripts": {
     "start": "react-scripts start",

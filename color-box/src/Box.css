@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 .box{
     margin: 2px;
     flex-basis: 12%;
     width: 200px;
     height: 200px;
+=======
+.box{
+    margin: 2px;
+    flex-basis: 12%;
+    width: 200px;
+    height: 200px;
+>>>>>>> 1c7916933388905e1188dd6f7d5a3eb837d27909
 }
