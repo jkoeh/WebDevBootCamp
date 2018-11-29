@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import TodoList from './TodoList';
 import './App.css';
 
 class App extends Component {
@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Hi</h1>
+         <TodoList/>
         </header>
       </div>
     );
