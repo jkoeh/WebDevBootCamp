@@ -1,0 +1,8 @@
+.guess-button{
+    border:none;
+    margin: 10px;
+    background-color: rgb(10, 140, 247);
+    color: white;
+    border-radius: 2px;
+    text-transform: capitalize;
+}

@@ -1,32 +1,68 @@
 import React, { Component } from 'react';
 import './App.css';
 import './Box.css'
-
+const CardState={
+  HIDING: 0,
+  SHOWING: 1,
+  MATCH: 2
+}
+/**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items An array containing the items.
+ */
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 class App extends Component {
   constructor(props) {
     super(props);
-    const colors = props.allColors.map(x => x).slice(0, 32);
-    this.state = {colors};
-    setInterval(()=>{
-      const boxIndex = Math.floor(Math.random()* colors.length);
-      const colorIndex = Math.floor(Math.random()* props.allColors.length);
-      colors[boxIndex] = props.allColors[colorIndex];
-      this.setState({colors})
-     }, 300)
+    const rndColor=() => props.allColors[Math.floor(Math.random()* props.allColors.length)];
+    let cards=[];
+    for(let i = 0; i<8; i++){
+      let color = rndColor();
+      console.log(color)
+      //create two box that matches
+      cards.push({id: i, cardState: CardState.HIDING, backgroundColor: color});
+      cards.push({id: i+8, cardState: CardState.HIDING, backgroundColor: color});
+    }
+    cards = shuffle(cards);
+    this.state = {cards, noClick: false};
+   
+      
+  }
+
+  handleClick(id){
+    //if the state is noClick or if the card is not hiding then ignore
+
+    //change the card to showing, 
+
+    //check cards in showing
+
+    //if there are no showing cards, add this card to showing card state
+
+    //if there are showing card , but they are not the same, revert both to Hidding
+    
+    //if there are showing card , and they are the same, set noclick to true then change both to MATCH, then set noClick to false
+
+    //
   }
   render() {
-    const boxes = this.state.colors.map((x, index) => <Box key={index} color={x} />);
+    const cards = this.state.cards.map((x) => <Card key={x.id} backgroundColor={x.backgroundColor} />);
     return (
       <div className="App">
-        {boxes}
+        {cards}
       </div>
     );
   }
 }
-const Box = ({color}) => {
-  const boxStyle = {backgroundColor: color};
+const Card = ({backgroundColor, CardState }) => {
+  let cardStyle = {backgroundColor: backgroundColor};
   return (
-    <div className="box" style={boxStyle}>
+    <div className="card" style={cardStyle} >
     </div>
   );
 }
