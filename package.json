@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jkoeh/WebDevBootCamp/issues"
   },
-  "homepage": "https://github.com/jkoeh/WebDevBootCamp#readme"
+  "homepage": "https://github.com/jkoeh/WebDevBootCamp#readme",
+  "dependencies": {
+    "create-react-app": "^2.1.1"
+  }
 }
