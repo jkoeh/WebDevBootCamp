@@ -1,4 +1,6 @@
 # React Router
+## Resource:
+<a>https://reacttraining.com/react-router/web/guides/quick-start</a>
 ## HTML history object
 - the obj allows us to navigate forward/back based on history of browser
 ```javascript
@@ -44,4 +46,77 @@ const defaultStyle={color: 'black'}
     <Route path="/about" component={About}/>
     <Route path="/" component={Home}/>
 </Switch>
+```
+### ULR parameter for a Route
+- URL parameters are parameters whose value is set dynamically by the URL path. This allow route to render the same component while passing the component the dynamic portion of the url so it can change based of it (often something like users/:uid)
+- by using the `match` Route prop, we are able to extract the url parameter: `match.params.NAME_OF_URLPARAMETER`
+```javascript
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+const Child = ({ match }) => (
+  <div>
+    <h3>ID: {match.params.website}</h3>
+  </div>
+)
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <h2>Accounts</h2>
+        <ul>
+          <li><Link to="/netflix">Netflix</Link></li>
+          <li><Link to="/zillow-group">Zillow Group</Link></li>
+          <li><Link to="/yahoo">Yahoo</Link></li>
+          <li><Link to="/modus-create">Modus Create</Link></li>
+        </ul>
+        <Route path="/:website" component={Child}/>
+      </Router>
+    )
+  }
+}
+```
+### Define Route props
+- match: info about how the url matches the route component
+- location: where you are now, similar to window location
+- history: similar to html5 history object, allows explicit changes to url
+### Define withRouter
+- if a component is not render within `<Router>` function, you can use withRouter to get the route props. simply wrap it during export
+```javascript
+const SwitchDemo =({history})=>{
+    render(){
+        return(
+            <div>
+            ...
+            </div>
+        )
+    }
+}
+export default withRouter(Switch Demo)
+
+```
+### Passing you own props to a component in Route(render vs component)
+- when you want to pass additional props to the component created by Route Component by that's not possible through component property. we will have to use render
+- you can either use component or render, never both
+```javascript
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+const teacher = ['a', 'b', 'c']
+const Teachers = ({ teachers }) => (
+  <ul>
+    {teachers.map(teach, ind)=>{
+        <li key ={ind}>{teach}</li>
+    }}
+  </ul>
+)
+const App =()=>{
+     <Route path="/:website" render={props=>(<Teachers {...props}, teachers={teachers}/>)}/>
+}
 ```
