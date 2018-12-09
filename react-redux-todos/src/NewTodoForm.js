@@ -14,6 +14,9 @@ class NewTodoForm extends Component {
     }
     handleSubmit(e){
         e.preventDefault();
+        this.props.handleSubmit(this.state.task)
+        e.target.reset();
+        
     }
     
     render() {
