@@ -12,9 +12,13 @@ class TodoList extends Component {
     handleAdd(val){
         this.props.dispatch(addTodo(val));
     }
+    handleDelete(id){
+        this.props.dispatch(removeTodo(id));
+    }
     render() {
         debugger;
-        let todos = this.props.todos.map((val, index) => (<Todo key={index} task={val.task} />))
+        let todos = this.props.todos.map((val, index) => (<Todo key={index} task={val.task} 
+            onDelete={this.handleDelete.bind(this, val._id)}/>))
         return (
             <div>
                 <NewTodoForm handleSubmit={this.handleAdd}/>
