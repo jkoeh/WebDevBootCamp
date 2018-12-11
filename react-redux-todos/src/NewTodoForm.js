@@ -16,6 +16,7 @@ class NewTodoForm extends Component {
         e.preventDefault();
         this.props.handleSubmit(this.state.task)
         e.target.reset();
+        this.props.history.push("/todos") //this comes from {...props} from react router
         
     }
     
