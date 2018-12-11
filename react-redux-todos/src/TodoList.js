@@ -10,10 +10,10 @@ class TodoList extends Component {
         this.handleAdd = this.handleAdd.bind(this);
     }
     handleAdd(val){
-        this.props.dispatch(addTodo(val));
+        this.props.addTodo(val);
     }
     handleDelete(id){
-        this.props.dispatch(removeTodo(id));
+        this.props.removeTodo(id);
     }
     render() {
         debugger;
@@ -34,4 +34,4 @@ function mapStateToProps(reduxState){
         todos: reduxState.todos
       };
 }
-export default connect(mapStateToProps)(TodoList);
+export default connect(mapStateToProps, {addTodo, removeTodo})(TodoList);
