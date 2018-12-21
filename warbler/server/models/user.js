@@ -5,14 +5,19 @@ const userSchema = new Schema({
     email: {
         type: String, required: true, unique: true
     },
-    userName: {
+    username: {
         type: String, required: true, unique: true
     },
     password: {
         type: String, required: true
     },
-    profileImageUrl: String
-
+    profileImageUrl: String,
+    messages: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Message"
+        }
+    ]
 });
 //add a prehook to hash password passed in userSchema 
 userSchema.pre('save', async function (next) {
@@ -29,12 +34,12 @@ userSchema.pre('save', async function (next) {
         return next(err);
     }
 });
-userSchema.method.comparePassword = async function(candidatePassword, next){
-    try{
+userSchema.methods.comparePassword = async function (candidatePassword, next) {
+    try {
         let isMatched = await bcrypt.compare(candidatePassword, this.password);
         return isMatched;
     }
-    catch(err){
+    catch (err) {
         return next(err);
     }
 }
