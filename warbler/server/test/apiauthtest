@@ -1,0 +1,17 @@
+curl -H "Content-Type: application/json" \
+-X POST \
+-d '{"username":"hacker","password":"xyz", "email": "hacker@gmail.com"}' \
+ http://localhost:8080/api/auth/signup
+
+
+curl -H "Content-Type: application/json" \
+-X POST \
+-d '{"password":"xyz", "email": "1@illumina.com"}' \
+ http://localhost:8080/api/auth/signin
+
+token for 1@illumina.com = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMWM2MDljN2Y5YzExY2Y3YjFkNzgyNyIsInVzZXJuYW1lIjoiMSIsImlhdCI6MTU0NTYyMDE5NX0.aJqtXdw_oME2WKc3h6lktys0QyUvXibr_7plDaPNWKE
+token for hacker@gmail.com = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMjA0YjM1YzM4MGZiMDA3OTc0ZjhmOSIsInVzZXJuYW1lIjoiaGFja2VyIiwiaWF0IjoxNTQ1NjIwMjc3fQ.zGAwe1TSk-OPsDusjKK4Xc8RVIUK3Mts_Hln3z044Bs
+curl -H "Content-Type: application/json, Authroization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMWM2MDljN2Y5YzExY2Y3YjFkNzgyNyIsInVzZXJuYW1lIjoiMSIsImlhdCI6MTU0NTYyMDE5NX0.aJqtXdw_oME2WKc3h6lktys0QyUvXibr_7plDaPNWKE" \
+-X POST \
+-d '{"text":"abcd"}' \
+ http://localhost:8080/api/users/5c1c609c7f9c11cf7b1d7827/messages
