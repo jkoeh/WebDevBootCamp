@@ -10,9 +10,14 @@ class AuthForm extends Component {
             profileImageUrl: ''
         };
     }
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
     render() {
         const {email, username, password, profileImageUrl} = this.state;
-        const {buttonText, heading} = this.props;
+        const {buttonText, heading, signUp} = this.props;
         return (
             <div>
                 <div className="row justify-content-md-center text-center"></div>
@@ -33,7 +38,27 @@ class AuthForm extends Component {
                             id="password"
                             name="password"
                             onChange={this.handleChange}
-                            type="password"/>
+                            type="password"/> 
+                            {signUp && (
+                            <div>
+                                <label htmlFor="username">Username:</label>
+                                <input
+                                    className='form-control'
+                                    id="username"
+                                    name="username"
+                                    onChange={this.handleChange}
+                                    value={username}
+                                    type="text"/>
+                                <label htmlFor="image-url">Image URL:</label>
+                                <input
+                                    className='form-control'
+                                    id="image-url"
+                                    name="profileImageUrl"
+                                    onChange={this.handleChange}
+                                    value={profileImageUrl}
+                                    type="text"/>
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>
