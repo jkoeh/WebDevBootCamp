@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class AuthForm extends Component {
     constructor(props) {
@@ -15,9 +15,19 @@ class AuthForm extends Component {
             [e.target.name]: e.target.value
         })
     }
+    handleSubmit = e => {
+        e.preventDefault();
+        const authType = this.props.signUp ? "signup" : "signin";
+        this.props.onAuth(authType, this.state).then(() => {
+          console.log("LOGGED IN!");
+        })
+        .catch(
+            ()=>  console.log("Danger!")
+        );
+      };
     render() {
-        const {email, username, password, profileImageUrl} = this.state;
-        const {buttonText, heading, signUp} = this.props;
+        const { email, username, password, profileImageUrl } = this.state;
+        const { buttonText, heading, signUp } = this.props;
         return (
             <div>
                 <div className="row justify-content-md-center text-center"></div>
@@ -31,15 +41,15 @@ class AuthForm extends Component {
                             name="email"
                             onChange={this.handleChange}
                             value={email}
-                            type="text"/>
+                            type="text" />
                         <label htmlFor="password">Password:</label>
                         <input
                             className='form-control'
                             id="password"
                             name="password"
                             onChange={this.handleChange}
-                            type="password"/> 
-                            {signUp && (
+                            type="password" />
+                        {signUp && (
                             <div>
                                 <label htmlFor="username">Username:</label>
                                 <input
@@ -48,7 +58,7 @@ class AuthForm extends Component {
                                     name="username"
                                     onChange={this.handleChange}
                                     value={username}
-                                    type="text"/>
+                                    type="text" />
                                 <label htmlFor="image-url">Image URL:</label>
                                 <input
                                     className='form-control'
@@ -56,9 +66,12 @@ class AuthForm extends Component {
                                     name="profileImageUrl"
                                     onChange={this.handleChange}
                                     value={profileImageUrl}
-                                    type="text"/>
+                                    type="text" />
                             </div>
                         )}
+                        <button  type="submit" className="btn btn-primary btn-block btn-lg">
+                            {buttonText}
+                        </button>
                     </form>
                 </div>
             </div>
