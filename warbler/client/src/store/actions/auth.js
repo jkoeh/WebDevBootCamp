@@ -1,12 +1,20 @@
 import { apiCall } from '../../services/api';
 import {SET_CURRENT_USER} from '../actionTypes';
 import { resolve } from 'q';
-
+import {addError, removeError} from './errors';
 
 export function setCurrentUser(user) {
     return {
         type: SET_CURRENT_USER,
         user
+    }
+}
+export function logout(){
+    return dispatch =>{
+        //clear cookie
+        localStorage.clear();
+        //clear current user
+        dispatch(setCurrentUser({}))
     }
 }
 export function authUser(type, userData){
@@ -16,9 +24,11 @@ export function authUser(type, userData){
             .then(({token, ...user})=>{
                 localStorage.setItem("jwtToken", token);
                 dispatch(setCurrentUser(user));
+                dispatch(removeError());
                 resolve();
             })
             .catch(err => {
+                dispatch(addError(err.message));
                 reject(); // indicate the API call failed
               });
         })

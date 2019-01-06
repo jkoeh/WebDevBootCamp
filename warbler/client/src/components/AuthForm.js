@@ -3,12 +3,7 @@ import React, { Component } from 'react';
 class AuthForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            email: '',
-            username: '',
-            password: '',
-            profileImageUrl: ''
-        };
+        this.state = { email: '', username: '', password: '', profileImageUrl: '' };
     }
     handleChange = e => {
         this.setState({
@@ -18,22 +13,30 @@ class AuthForm extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const authType = this.props.signUp ? "signup" : "signin";
-        this.props.onAuth(authType, this.state).then(() => {
-          console.log("LOGGED IN!");
+        this.props.onAuth(authType, this.state)
+        .then(() => {
+            this.props.history.push('/');
         })
-        .catch(
-            ()=>  console.log("Danger!")
-        );
-      };
+        .catch(() => {
+            return;
+        });
+    };
     render() {
         const { email, username, password, profileImageUrl } = this.state;
-        const { buttonText, heading, signUp } = this.props;
+        const { buttonText, heading, signUp, errors, history, removeError } = this.props;
+        //listen to any change in route. if any change is detected we will call remove error
+        history.listen(()=> removeError())
         return (
             <div>
                 <div className="row justify-content-md-center text-center"></div>
                 <div className="col-md-6">
                     <form onSubmit={this.handleSubmit}>
                         <h2>{heading}</h2>
+                        {errors.message && (
+                            <div className="alert alert-danger">
+                                {errors.message}
+                            </div>
+                        )}
                         <label htmlFor="email">Email:</label>
                         <input
                             className='form-control'
@@ -48,28 +51,27 @@ class AuthForm extends Component {
                             id="password"
                             name="password"
                             onChange={this.handleChange}
-                            type="password" />
-                        {signUp && (
-                            <div>
-                                <label htmlFor="username">Username:</label>
-                                <input
-                                    className='form-control'
-                                    id="username"
-                                    name="username"
-                                    onChange={this.handleChange}
-                                    value={username}
-                                    type="text" />
-                                <label htmlFor="image-url">Image URL:</label>
-                                <input
-                                    className='form-control'
-                                    id="image-url"
-                                    name="profileImageUrl"
-                                    onChange={this.handleChange}
-                                    value={profileImageUrl}
-                                    type="text" />
-                            </div>
-                        )}
-                        <button  type="submit" className="btn btn-primary btn-block btn-lg">
+                            type="password" /> {signUp && (
+                                <div>
+                                    <label htmlFor="username">Username:</label>
+                                    <input
+                                        className='form-control'
+                                        id="username"
+                                        name="username"
+                                        onChange={this.handleChange}
+                                        value={username}
+                                        type="text" />
+                                    <label htmlFor="image-url">Image URL:</label>
+                                    <input
+                                        className='form-control'
+                                        id="image-url"
+                                        name="profileImageUrl"
+                                        onChange={this.handleChange}
+                                        value={profileImageUrl}
+                                        type="text" />
+                                </div>
+                            )}
+                        <button type="submit" className="btn btn-primary btn-block btn-lg">
                             {buttonText}
                         </button>
                     </form>
