@@ -51,3 +51,7 @@ ul.nav.navbar-nav li{
   color: #fff;
   text-shadow: 0 0 8px #66757f;
 }
+#message .list-group-item{
+  display: flex;
+  align-items: flex-start;
+}
