@@ -18,6 +18,6 @@ export const fetchMessages = () => {
     return dispatch => {
         return apiCall("GET", "/api/messages")
             .then(res => dispatch(loadMessages(res)))
-            .catch(err => addError(err.message));
+            .catch(err => addError(err.messages));
     }
 }
