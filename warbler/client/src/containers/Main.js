@@ -36,6 +36,7 @@ const Main = props => {
                         heading='Join Warbler Today'
                         {...props}/>)
                 }}/>
+                <Route  path="/users/:id/messages/new"  ></Route>
             </Switch>
         </div>
     );
