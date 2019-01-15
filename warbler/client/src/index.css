@@ -54,4 +54,8 @@ ul.nav.navbar-nav li{
 #message .list-group-item{
   display: flex;
   align-items: flex-start;
+  padding: 7px 20px 12px;
+}
+#messages:not(.no-hover) .list-group-item:hover {
+  background-color: #e6ecf0;
 }

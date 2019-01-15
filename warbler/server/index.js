@@ -15,6 +15,10 @@ app.use(bodyParser.json())
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users/:id/messages', loginRequired, ensureCorrectUser, messageRoute);
+app.use('/api/users', async function(req, res, next){
+  let users = await db.User.find();
+  return res.status(200).json(users);  
+})
 app.get('/api/messages', loginRequired, async function (req, res, next) {
   try {
     let messages = await db.Message.find()
