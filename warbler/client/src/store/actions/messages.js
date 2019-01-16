@@ -14,6 +14,17 @@ export const loadMessages = messages => {
 // 2. create action creator for remove message 
 // 3. create reducer to handle removed messages
 // 4. create a button to delete message
+export const remove = id =>{
+    return {type: REMOVE_MESSAGE, id: id}
+}
+
+export const removeMessage = (user_id, message_id) =>{
+    return dispatch =>{
+        return apiCall("Delete", `api/users/${user_id}/messages/${message_id}`)
+        .then(()=> dispatch(remove(message_id)))
+        .catch(err=> dispatch(addError(err.message)));
+    }
+}
 export const fetchMessages = () => {
     return dispatch => {
         return apiCall("GET", "/api/messages")

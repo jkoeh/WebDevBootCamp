@@ -13,7 +13,7 @@ import DefaultProfileImg from '../images/default-profile-image.jpg'
 import PropTypes from 'prop-types';
 
 const MessageItem = props => {
-    const { date, text, username, profileImageUrl } = props;
+    const { date, text, username, profileImageUrl, removeMessage} = props;
     return (
         <div>
             <li className="list-group-item">
@@ -34,16 +34,15 @@ const MessageItem = props => {
                     </span>
                     <p>{text}</p>
                 </div>
+                <button type="button" className="btn btn-danger" onClick={removeMessage}>Delete</button>
             </li>
         </div>
     )
 };
 
 MessageItem.propTypes = {
-    date: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
-    profileImageUrl: PropTypes.string.isRequired
 };
 
 export default MessageItem;

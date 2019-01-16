@@ -29,10 +29,10 @@ exports.getMessage = async function (req, res, next) {
     try {
         //get message 
         var message = await db.Message.findById(req.params.message_id);
-        if(message){
-        return res.status(200).json(message);
+        if (message) {
+            return res.status(200).json(message);
         }
-        else{
+        else {
             return next({
                 status: 404, message: `message ${req.params.message_id} does not exist.`
             })
@@ -45,16 +45,15 @@ exports.getMessage = async function (req, res, next) {
 exports.deleteMessage = async function (req, res, next) {
     try {
         var message = await db.Message.findById(req.params.message_id);
-        if(message){
+        if (message) {
+            await message.remove();
             return res.status(200).json(message);
-            }
-            else{
-                return next({
-                    status: 404, message: `message ${req.params.message_id} does not exist.`
-                })
-            }
-        await message.remove();
-        return res.status(200).json(message);
+        }
+        else {
+            return next({
+                status: 404, message: `message ${req.params.message_id} does not exist.`
+            });
+        }
     }
     catch (e) {
         return next(e);
