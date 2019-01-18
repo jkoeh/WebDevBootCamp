@@ -17,9 +17,8 @@ class MessageList extends Component {
             .props
             .fetchMessages();
     }
-    
     render() {
-        const { messages, removeMessage} = this.props;
+        const { messages, removeMessage, currentUserId} = this.props;
         let messageList = messages.map(m => {
             return <MessageItem
                 key={m._id}
@@ -27,7 +26,8 @@ class MessageList extends Component {
                 text={m.text}
                 username={m.user.username}
                 profileImageUrl={m.user.profileImageUrl} 
-                removeMessage = {removeMessage.bind(this, m.user._id, m._id)}/>
+                removeMessage = {removeMessage.bind(this, m.user._id, m._id)}
+                isCorrectUser = {currentUserId === m.user._id}/>
         })
         return (
             <div className="row col-sm-8">
@@ -41,7 +41,7 @@ class MessageList extends Component {
     }
 }
 function mapStateToProps(state) {
-    return { messages: state.messages }
+    return { messages: state.messages, currentUserId: state.currentUser.user.id }
 }
 
 export default connect(mapStateToProps, { fetchMessages, removeMessage })(MessageList);

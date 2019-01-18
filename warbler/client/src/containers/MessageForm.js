@@ -17,7 +17,7 @@ class MessageForm extends Component {
     }
     render() {
         return (
-            <form onSubmit={this.handleNewMessage}>
+            <form className="message-form" onSubmit={this.handleNewMessage}>
                 {this.props.errors.message && (
                     <div className="alert alert-danger">{this.props.errors.message}</div>
                 )}

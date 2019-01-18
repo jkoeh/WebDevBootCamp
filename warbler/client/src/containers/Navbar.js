@@ -1,15 +1,20 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import Logo from '../images/warbler-logo.png';
 import {logout} from '../store/actions/auth';
 
 class Navbar extends Component {
-    logout = e =>{
+    logout = e => {
         e.preventDefault();
-        this.props.logout();
+        this
+            .props
+            .logout();
     }
     render() {
+        var navbarStyle = {
+            color: 'white'
+        };
         return (
             <nav className="navbar navbar-expand-lg">
                 <div className="container-fluid">
@@ -19,17 +24,20 @@ class Navbar extends Component {
                     {this.props.currentUser.isAuthenticated
                         ? (
                             <div>
-                                <ul className="nav-navbar-nav navbar-right">
+                                <ul
+                                    className="nav navbar-nav navbar-right"
+                                    style={navbarStyle}>
                                     <li>
-                                        <Link to={`/users/${this.props.currentUser.user.id}/messages/new`}> New Message</Link>
+                                        <Link to={`/users/${this.props.currentUser.user.id}/messages/new`}>
+                                            New Message</Link>
                                     </li>
                                     <li>
                                         <a onClick={this.logout}>Log Out</a>
                                     </li>
                                 </ul>
                             </div>
-                        ) :
-                        (
+                        )
+                        : (
                             <ul className="nav navbar-nav navbar-right">
                                 <li>
                                     <Link to="/signup">Sign Up</Link>
@@ -39,13 +47,13 @@ class Navbar extends Component {
                                 </li>
                             </ul>
                         )
-                    }
+}
                 </div>
             </nav>
         )
     }
 }
 function mapStateToProps(state) {
-    return { currentUser: state.currentUser };
+    return {currentUser: state.currentUser};
 }
 export default connect(mapStateToProps, {logout})(Navbar);

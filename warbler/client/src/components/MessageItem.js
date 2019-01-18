@@ -13,7 +13,7 @@ import DefaultProfileImg from '../images/default-profile-image.jpg'
 import PropTypes from 'prop-types';
 
 const MessageItem = props => {
-    const { date, text, username, profileImageUrl, removeMessage} = props;
+    const { date, text, username, profileImageUrl, removeMessage, isCorrectUser} = props;
     return (
         <div>
             <li className="list-group-item">
@@ -34,7 +34,7 @@ const MessageItem = props => {
                     </span>
                     <p>{text}</p>
                 </div>
-                <button type="button" className="btn btn-danger" onClick={removeMessage}>Delete</button>
+                {isCorrectUser &&( <button type="button" className="btn btn-danger" onClick={removeMessage}>Delete</button>)}  
             </li>
         </div>
     )
